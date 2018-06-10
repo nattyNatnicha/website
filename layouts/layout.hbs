@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{{ description }}">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <title>{{ title }}</title>
+<link href="https://fonts.googleapis.com/css?family=Dokdo" rel="stylesheet">
+    <link inline rel="stylesheet" type="text/css" href="assets/css/basscss.min.css">
+    {{!--<script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>--}}
+  </head>
+  <body>
+<div class="max-width-4 mx-auto">
+  <nav class="clearfix">
+  <div class="left m1 sm-hide">
+    <a href="/">
+      <img src="/images/logo.png" width="54" height="54" class="circle align-middle" alt="">
+    </a>
+    <a href="/">Home</a>
+    <a href="/blog" class="ml2">Blog</a>
+    <a href="/photos" class="ml2">Photos</a>
+  </div>
+  <div class="right m1">
+    <a href="/profile">
+      <img src="/images/profile.jpg" width="54" height="54" class="circle align-middle" alt="">
+    </a>
+    {{!--<a href="/profile" class="btn">{{title}}</a>--}}
+  </div>
+  </nav>
+
+</div>
+<div class="max-width-3 mx-auto">
+{{{ contents }}}
+</div>
+<footer >
+<div class="max-width-4 mx-auto py2">
+<div class="flex">
+  <div class="flex-auto">
+
+  </div>
+  <div class="flex-auto">
+    <ul class="list-reset">
+    <li><a href="/terms" class="ml2">Terms</a></li>
+    <li><a href="/privacy" class="ml2">Privacy</a></li>
+    </ul>
+  </div>
+  <div class="flex-auto">
+    <ul class="list-reset">
+    <li><a href="/terms" class="ml2">Terms</a></li>
+    <li><a href="/privacy" class="ml2">Privacy</a></li>
+    </ul>
+  </div>
+</div>
+    <span class="center">&copy; 2018 fernButterfly. All right reserved.</span>
+</div>
+</footer>
+  </body>
+</html>
+

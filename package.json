@@ -2,9 +2,21 @@
   "name": "website",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "css-compile": "postcss pcss/basscss.css -d assets/css --config postcss.config.js",
+    "css-minify": "postcss assets/css/basscss.css --no-map -u cssnano -o assets/css/basscss.min.css",
+    "css": "npm run css-compile && npm run css-minify && npm run build-static",
+    "js-compile": "echo \"no js yet\" && exit 0",
+    "watch": "npm run watch-css & npm run watch-js & npm run watch-metalsmith",
+    "watch-css": "nodemon --watch pcss/ -e css -x \"npm run css\"",
+    "watch-js": "nodemon --watch js -e js -x \"npm run js-compile\"",
+    "watch-metalsmith": "nodemon --watch pcss --watch layouts --watch src -e hbs,md -x \"npm run build-static\"",
+    "build-static": "node build",
+    "build": "npm run css && npm run build-static",
+    "start": "npm run watch & nodemon server",
+    "test": "echo \"Error: no test specified\" && exit 0",
+    "deploy": "git subtree push --prefix=public/ blog master"
   },
   "repository": {
     "type": "git",
@@ -16,5 +28,35 @@
   "bugs": {
     "url": "https://github.com/nattyNatnicha/website/issues"
   },
-  "homepage": "https://github.com/nattyNatnicha/website#readme"
+  "homepage": "https://github.com/nattyNatnicha/website#readme",
+  "dependencies": {
+    "debug": "^3.1.0",
+    "express": "^4.16.3"
+  },
+  "devDependencies": {
+    "autoprefixer": "^8.6.0",
+    "basscss": "^8.0.4",
+    "basscss-background-colors": "^2.1.0",
+    "basscss-btn": "^1.1.1",
+    "basscss-colors": "^2.2.0",
+    "cssnano": "^3.10.0",
+    "cssstats": "^3.2.0",
+    "jstransformer-handlebars": "^1.1.0",
+    "metalsmith": "^2.3.0",
+    "metalsmith-assets": "^0.1.0",
+    "metalsmith-inline-source": "^1.0.6",
+    "metalsmith-layouts": "^2.1.0",
+    "metalsmith-markdown": "^0.2.2",
+    "metalsmith-permalinks": "^0.5.0",
+    "metalsmith-sass": "^1.5.1",
+    "nodemon": "^1.17.5",
+    "postcss-calc": "^6.0.1",
+    "postcss-cli": "^5.0.0",
+    "postcss-custom-media": "^6.0.0",
+    "postcss-custom-properties": "^7.0.0",
+    "postcss-discard-comments": "^2.0.4",
+    "postcss-import": "^11.1.0",
+    "postcss-remove-root": "0.0.2",
+    "postcss-reporter": "^5.0.0"
+  }
 }

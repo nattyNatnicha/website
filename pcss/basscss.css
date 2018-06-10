@@ -1,0 +1,155 @@
+
+@import 'basscss-type-scale';
+@import 'basscss-typography';
+@import 'basscss-layout';
+@import 'basscss-align';
+/* @import 'basscss-margin'; */
+@import 'margin';
+@import 'basscss-padding';
+@import 'basscss-grid';
+@import 'basscss-flexbox';
+@import 'basscss-position';
+@import 'basscss-border';
+@import 'basscss-hide';
+
+
+/* Optional Modules (not included in Basscss by default) */
+
+@import 'basscss-btn';
+@import 'basscss-colors';
+@import 'basscss-background-colors';
+
+/*
+@import 'basscss-addons/modules/responsive-margin';
+@import 'basscss-addons/modules/responsive-padding';
+
+@import 'basscss-addons/modules/media-object';
+@import 'basscss-addons/modules/all';
+@import 'basscss-addons/modules/forms';
+@import 'basscss-addons/modules/input-range';
+@import 'basscss-addons/modules/progress';
+
+@import 'basscss-addons/modules/btn';
+@import 'basscss-addons/modules/btn-primary';
+@import 'basscss-addons/modules/btn-outline';
+@import 'basscss-addons/modules/btn-sizes';
+
+@import 'basscss-addons/modules/colors';
+@import 'basscss-addons/modules/background-colors';
+@import 'basscss-addons/modules/border-colors';
+@import 'basscss-addons/modules/darken';
+@import 'basscss-addons/modules/lighten';
+@import 'basscss-addons/modules/background-images';
+*/
+
+/* Custom media queries */
+/*
+@custom-media --breakpoint-sm (min-width: 40em);
+@custom-media --breakpoint-md (min-width: 52em);
+@custom-media --breakpoint-lg (min-width: 64em);
+*/
+
+:root {
+  --h1: 2rem;
+  --h2: 1.5rem;
+  --h3: 1.25rem;
+  --h4: 1rem;
+  --h5: .875rem;
+  --h6: .75rem;
+  
+  --custom-color-foreground: #f02872;
+  --custom-color-background: #ddd;
+}
+
+/* bassplate */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Dokdo', cursive;
+  font-size: 28px;
+  line-height: 1.5;
+  margin: 0;
+  color: var(--custom-color-foreground);
+  background-color: var(--custom-color-background);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+svg {
+  max-height: 100%;
+}
+
+a {
+  color: var(--custom-color-foreground);
+  text-decoration: none;
+}
+
+h1, h2, h3,
+h4, h5, h6 {
+  font-weight: 600;
+  line-height: 1.25;
+  margin-top: 1em;
+  margin-bottom: .5em;
+}
+
+h1 { font-size: 2rem }
+h2 { font-size: 1.5rem }
+h3 { font-size: 1.25rem }
+h4 { font-size: 1rem }
+h5 { font-size: .875rem }
+h6 { font-size: .75rem }
+
+p, dl, ol, ul, pre, blockquote {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+code,
+pre,
+samp {
+  font-family:
+    'Roboto Mono',
+    'Source Code Pro',
+    Menlo,
+    Consolas,
+    'Liberation Mono',
+    monospace;
+}
+
+code, samp {
+  font-size: 87.5%;
+  padding: .125em;
+}
+
+pre {
+  font-size: 87.5%;
+  overflow: scroll;
+}
+
+blockquote {
+  font-size: 1.25rem;
+  font-style: italic;
+  margin-left: 0;
+}
+
+hr {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+  border: 0;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: #ccc;
+}
+
+footer,
+footer a {
+  color: var(--custom-color-background);
+  background-color: var(--custom-color-foreground);
+  min-height: 10rem;
+}
