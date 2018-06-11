@@ -1,7 +1,6 @@
 ---
 layout: layout.hbs
 ---
-
 <div class="col-12 m2">
   <div class="center rounded bg-white my2">
     <img src="/images/mark-adriane-272672-unsplash-sm.jpg" />
