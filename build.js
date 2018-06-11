@@ -1,67 +1,57 @@
-const fse = require('fs-extra');
-const path = require('path');
-const { promisify } = require('util');
-const ejsRenderFile = promisify(require('ejs').renderFile);
-const globP = promisify(require('glob'));
-const { inlineSource } = require('inline-source');
+const Metalsmith = require('metalsmith');
+const postcss = require('metalsmith-postcss');
+const markdown = require('metalsmith-markdown');
+const layouts = require('metalsmith-layouts');
+const permalinks = require('metalsmith-permalinks');
+const assets = require('metalsmith-assets');
+const inlinesource = require('metalsmith-inline-source');
 
-const assetsPath = './assets';
-const layoutsPath = './layouts';
-const srcPath = './src';
-const distPath = './public';
-
-const site = {
-    title: 'natty-bot-slack-web',
-    description: 'natty bot slack web'
-};
-  
-fse.emptyDirSync(distPath);
-fse.copy(`${assetsPath}`, `${distPath}`);
-
-globP('**/*.ejs', { cwd: `${srcPath}` })
-.then((files) => {
-    files.forEach((file) => {
-        const fileData = path.parse(file);
-        const destPath = path.join(distPath, fileData.dir);
-        console.log(fileData, destPath);
-        fse.mkdirs(destPath)
-        .then(() => {
-            return ejsRenderFile(`${srcPath}/${file}`, Object.assign({}, site));
-        })
-        .then((pageContents) => {
-          return ejsRenderFile(`${layoutsPath}/main.ejs`, Object.assign({}, site, { body: pageContents }));
-        })
-        .then((contents) => {
-            return inlineSource(contents, {compress: true});
-        })
-        .then((layoutContent) => {
-          fse.writeFile(`${destPath}/${fileData.name}.html`, layoutContent);
-        })
-        .catch((err) => { console.error(err) });
-    });
+Metalsmith(__dirname)
+.metadata({
+  title: "nattyNatnicha",
+  description: "natty web site",
+  url: "https://nattynatnicha.github.io/"
+})
+.source('src')
+.destination('public')
+.clean(true)
+.use(postcss({
+  plugins: {
+    'postcss-import': {},
+    'postcss-custom-media': {},
+    'postcss-custom-properties': {preserve: 'computed'},
+    'postcss-remove-root': {},
+    'postcss-calc': {},
+    'cssstats': {},
+    'postcss-discard-comments': {},
+    'autoprefixer': {},
+    'postcss-reporter': {},
+    'cssnano': {
+      preset: ['default', {
+        discardComments: {
+          removeAll: true,
+        },
+      }]
+    }
+  },
+  map: false
+}))
+.use(assets({
+  source: 'assets',
+  destination: '.'
+}))
+.use(markdown())
+.use(permalinks({
+  relative: false
+}))
+.use(layouts({
+  directory: 'layouts',
+  engine: 'handlebars'
+}))
+.use(inlinesource({
+  compress: false
+}))
+.build(function(err, files) {
+  if (err) { throw err; }
+  console.log('Done!');
 });
-// // read page templates
-// globP('**/*.ejs', { cwd: `${srcPath}/pages` })
-//   .then((files) => {
-//     files.forEach((file) => {
-//       const fileData = path.parse(file)
-//       const destPath = path.join(distPath, fileData.dir)
-
-//       // create destination directory
-//       fse.mkdirs(destPath)
-//         .then(() => {
-//           // render page
-//           return ejsRenderFile(`${srcPath}/pages/${file}`, Object.assign({}, config))
-//         })
-//         .then((pageContents) => {
-//           // render layout with page contents
-//           return ejsRenderFile(`${srcPath}/layout.ejs`, Object.assign({}, config, { body: pageContents }))
-//         })
-//         .then((layoutContent) => {
-//           // save the html file
-//           fse.writeFile(`${destPath}/${fileData.name}.html`, layoutContent)
-//         })
-//         .catch((err) => { console.error(err) })
-//     })
-//   })
-// .catch((err) => { console.error(err) })
